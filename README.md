@@ -37,21 +37,36 @@ Also, there's a new AltGr key on the left of the keyboard and it is possible to 
 
 You'd have to modify several file for it to work :
 
-  * /usr/share/X11/xkb/rules/\*.lst, add this line near "bepo" : "bepof     fr: French (Bepo, ergonomic, Dvorak way, customized)"
+  * /usr/share/X11/xkb/rules/\*.lst, add these lines in layout and variant : 
+    * custom    Custom layout
+    * bepof     custom: French (Bepo, ergonomic, Dvorak way, customized)
   * /usr/share/X11/xkb/rules/base.xml, add these lines near "bepo" variant : 
 
 ```xml
-<variant>
-  <configItem>
-    <name>bepof</name>
-    <description>French (Bepo, ergonomic, Dvorak way, customized)</description>
-  </configItem>
-</variant>
+    <layout>
+      <configItem>
+        <name>Custom</name>
+        
+        <shortDescription>custom</shortDescription>
+        <description>Custom layout</description>
+        <languageList>
+          <iso639Id>fra</iso639Id>
+        </languageList>
+      </configItem>
+      <variantList>
+        <variant>
+          <configItem>
+            <name>bepof</name>
+            <description>French (Bepo, ergonomic, Dvorak way, customized)</description>
+          </configItem>
+        </variant>
+      </variantList>
+    </layout>
 ```
 
-  * /usr/share/X11/xkb/symbols/fr append the file bepof to it, for exemple by issuing this command : `cat bepof >> /usr/share/X11/xkb/symbols/fr`. You will probably need root privilege for this.
+  * /usr/share/X11/xkb/symbols/custom append the file bepof to it, for example by issuing this command : `cat bepof >> /usr/share/X11/xkb/symbols/custom`. You will probably need root privilege for this.
 
-You can now use the command `setxkbmap -layout fr -variant bepof` to test it out. If you want this change to be permanent, you should edit the /etc/X11/xorg.conf.d folder. Refer to online documentation for more details.
+You can now use the command `setxkbmap -layout custom -variant bepof` to test it out. If you want this change to be permanent, you should edit the /etc/X11/xorg.conf.d folder. Refer to online documentation for more details.
 
 
 ## What next ?
